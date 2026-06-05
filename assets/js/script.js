@@ -3,6 +3,15 @@
   // Menu mobile
   const header = document.querySelector('.header');
   const toggle = document.getElementById('navToggle');
+
+  // Header compacto ao rolar
+  if (header) {
+    var onScroll = function () {
+      header.classList.toggle('is-scrolled', window.scrollY > 20);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
   if (toggle && header) {
     toggle.addEventListener('click', function () {
       const open = header.classList.toggle('is-open');
@@ -64,10 +73,12 @@
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
-    revealEls.forEach(function (el) {
+    revealEls.forEach(function (el, i) {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(22px)';
-      el.style.transition = 'opacity .5s ease, transform .5s ease';
+      el.style.transform = 'translateY(26px) scale(.98)';
+      // stagger por posição dentro do mesmo "grupo" (reinicia a cada 4)
+      var delay = (i % 4) * 0.08;
+      el.style.transition = 'opacity .6s ease ' + delay + 's, transform .6s cubic-bezier(.22,1,.36,1) ' + delay + 's';
       obs.observe(el);
     });
     // Safety net: if anything is still hidden after 2.5s, force-show it.

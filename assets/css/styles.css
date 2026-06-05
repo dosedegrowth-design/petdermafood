@@ -25,7 +25,7 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:96px}
 body{margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);
   line-height:1.6;font-size:17px;overflow-x:hidden}
 img{max-width:100%;display:block;height:auto}
@@ -63,10 +63,13 @@ p{margin:0}
 .section-head__lead{margin-top:14px;color:var(--muted)}
 
 /* ---------- Header (pílula branca flutuante) ---------- */
-.header{position:sticky;top:0;z-index:50;padding:14px 22px}
+.header{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 22px;
+  transition:padding .3s ease}
+.header.is-scrolled{padding:8px 22px}
 .header__pill{max-width:var(--container);margin-inline:auto;background:#fff;
   border-radius:999px;box-shadow:var(--shadow);display:flex;align-items:center;
-  gap:18px;padding:10px 14px 10px 22px}
+  gap:18px;padding:10px 14px 10px 22px;transition:box-shadow .3s ease}
+.header.is-scrolled .header__pill{box-shadow:0 8px 30px rgba(17,92,141,.16)}
 .header__logo img{height:32px;width:auto}
 .nav{display:flex;gap:24px;margin-left:18px;font-family:var(--display);font-weight:600;font-size:15px}
 .nav a{color:var(--ink);position:relative;padding:4px 0}
@@ -78,26 +81,53 @@ p{margin:0}
 .nav-toggle span{width:24px;height:2.5px;background:var(--green-deep);border-radius:2px;transition:.25s}
 
 /* ---------- Hero (fundo verde) ---------- */
-.hero{position:relative;margin-top:-78px;padding:120px 0 70px;overflow:hidden;
-  background:linear-gradient(160deg,#63c896 0%,var(--green) 45%,var(--green-dark) 100%)}
-.hero__inner{display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center}
+.hero{position:relative;padding:128px 0 96px;overflow:hidden;
+  background:linear-gradient(160deg,#63c896 0%,var(--green) 45%,var(--green-dark) 100%);
+  background-size:160% 160%;animation:gradShift 14s ease-in-out infinite}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero__inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center}
 .hero__copy{color:#fff}
 .hero__title{font-size:clamp(36px,5.6vw,62px);color:#fff;text-transform:none}
 .hero__title-sub{display:block;font-size:.62em;font-weight:600;margin-top:6px;color:rgba(255,255,255,.95)}
 .hero__lead{margin-top:18px;font-size:18px;color:rgba(255,255,255,.92);max-width:520px}
 .hero__cta{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
 .hero__media{position:relative}
-.hero__media img{border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);transform:rotate(-1deg);background:rgba(255,255,255,.12)}
+.hero__media img{border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
+  background:rgba(255,255,255,.12);animation:heroFloat 6s ease-in-out infinite}
+@keyframes heroFloat{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(-1deg) translateY(-14px)}}
+/* blobs decorativos no fundo */
+.hero__blob{position:absolute;border-radius:50%;filter:blur(6px);z-index:0;pointer-events:none;
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.28),transparent 70%)}
+.hero__blob--a{width:360px;height:360px;top:-90px;left:-80px;animation:blobA 16s ease-in-out infinite}
+.hero__blob--b{width:280px;height:280px;bottom:-60px;right:-40px;
+  background:radial-gradient(circle at 50% 50%,rgba(17,92,141,.25),transparent 70%);
+  animation:blobB 18s ease-in-out infinite}
+@keyframes blobA{50%{transform:translate(40px,30px) scale(1.1)}}
+@keyframes blobB{50%{transform:translate(-30px,-20px) scale(1.12)}}
 .hero__doodle{position:absolute;z-index:1;pointer-events:none;opacity:.9}
-.hero__doodle--1{width:120px;top:14%;right:44%;animation:float 6s ease-in-out infinite}
+.hero__doodle--1{width:120px;top:16%;right:44%;animation:float 6s ease-in-out infinite}
+.hero__doodle--2{width:66px;top:21%;left:1.5%;animation:float 7.5s ease-in-out infinite reverse}
 @keyframes float{50%{transform:translateY(-14px)}}
+/* divisória curva hero -> seção branca */
+.hero__wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:70px;z-index:3;display:block}
+
+/* ---------- Entrada / reveal genérico ---------- */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.anim{opacity:0;animation:fadeUp .7s cubic-bezier(.22,1,.36,1) var(--d,0s) forwards}
+@media(prefers-reduced-motion:reduce){
+  .anim{opacity:1;animation:none}
+  .hero,.hero__media img,.hero__blob,.hero__doodle,.fab-whats::before{animation:none!important}
+}
 
 /* ---------- Highlights ---------- */
 .highlights{padding:64px 0 10px}
 .highlights__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
 .highlight{text-align:center;padding:0 10px}
 .highlight__icon{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
-  margin:0 auto 16px;color:var(--green);border:2px solid var(--green);background:var(--green-soft)}
+  margin:0 auto 16px;color:var(--green);border:2px solid var(--green);background:var(--green-soft);
+  transition:transform .35s cubic-bezier(.22,1,.36,1),background .3s,color .3s}
+.highlight:hover .highlight__icon{transform:translateY(-6px) scale(1.08) rotate(-6deg);
+  background:var(--green);color:#fff}
 .highlight h3{font-size:18.5px;margin-bottom:8px;color:var(--green-deep)}
 .highlight p{color:var(--muted);font-size:15.5px}
 
@@ -124,9 +154,11 @@ p{margin:0}
 .value-card{background:linear-gradient(160deg,#5fc492,var(--green-dark));color:#fff;
   border-radius:var(--radius);padding:28px 24px;box-shadow:var(--shadow);transition:.2s}
 .value-card:nth-child(even){background:linear-gradient(160deg,#46b585,var(--green-deep))}
-.value-card:hover{transform:translateY(-6px)}
+.value-card{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+.value-card:hover{transform:translateY(-10px) rotate(-1.2deg);box-shadow:var(--shadow-lg)}
 .value-card__icon{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
-  background:rgba(255,255,255,.18);color:#fff;margin-bottom:16px}
+  background:rgba(255,255,255,.18);color:#fff;margin-bottom:16px;transition:transform .4s}
+.value-card:hover .value-card__icon{transform:scale(1.12) rotate(8deg)}
 .value-card h3{color:#fff;font-size:17.5px;margin-bottom:8px}
 .value-card p{color:rgba(255,255,255,.9);font-size:14.8px}
 
