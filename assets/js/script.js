@@ -43,9 +43,19 @@
     });
   }
 
-  // Reveal on scroll
-  if ('IntersectionObserver' in window) {
-    const obs = new IntersectionObserver(function (entries) {
+  // Reveal on scroll — purely additive, never leaves content hidden
+  var revealEls = Array.prototype.slice.call(
+    document.querySelectorAll('.highlight,.value-card,.step,.post,.feature')
+  );
+  function showAll() {
+    revealEls.forEach(function (el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
           e.target.style.opacity = '1';
@@ -53,12 +63,16 @@
           obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.highlight,.value-card,.step,.post,.feature').forEach(function (el) {
+    }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function (el) {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
+      el.style.transform = 'translateY(22px)';
       el.style.transition = 'opacity .5s ease, transform .5s ease';
       obs.observe(el);
     });
+    // Safety net: if anything is still hidden after 2.5s, force-show it.
+    setTimeout(showAll, 2500);
+  } else {
+    showAll();
   }
 })();
