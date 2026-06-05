@@ -1,3 +1,7 @@
 index_original.html
+index_original*.html
 public/
+pdf_pages/
 .claude/
+build_blog.py
+*.py

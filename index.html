@@ -290,29 +290,32 @@
     </div>
     <div class="blog__grid">
       <article class="post">
-        <a href="#" class="post__media"><img src="assets/img/blog-1.jpg" alt="Cão feliz ao lado de tigela com comida natural" width="650" height="355"></a>
+        <a href="blog/alimentacao-natural-para-caes-guia-completo.html" class="post__media"><img src="assets/img/blog-1.jpg" alt="Cão feliz ao lado de tigela com comida natural" width="650" height="355" loading="lazy"></a>
         <div class="post__body">
-          <h3>Como são desenvolvidas as fórmulas da Petderma Food?</h3>
-          <p>Conheça o processo por trás da alimentação que cuida da pele e da saúde do seu pet.</p>
-          <a href="#" class="post__link">Ler mais →</a>
+          <h3><a href="blog/alimentacao-natural-para-caes-guia-completo.html">Alimentação natural para cães: o guia completo para começar</a></h3>
+          <p>Benefícios, ingredientes, porções e como iniciar com segurança a dieta do seu pet.</p>
+          <a href="blog/alimentacao-natural-para-caes-guia-completo.html" class="post__link">Ler mais →</a>
         </div>
       </article>
       <article class="post">
-        <a href="#" class="post__media"><img src="assets/img/blog-2.jpg" alt="Cão saudável e ativo" width="600" height="327"></a>
+        <a href="blog/alergia-alimentar-em-caes-sintomas-causas.html" class="post__media"><img src="assets/img/dogs-veggies.png" alt="Vários cães felizes ao redor de legumes frescos" width="650" height="365" loading="lazy"></a>
         <div class="post__body">
-          <h3>Como a comida afeta o humor e o comportamento do seu pet?</h3>
-          <p>Descubra o impacto da alimentação na mente e no bem-estar do seu animal.</p>
-          <a href="#" class="post__link">Ler mais →</a>
+          <h3><a href="blog/alergia-alimentar-em-caes-sintomas-causas.html">Alergia alimentar em cães: sintomas, causas e como a dieta ajuda</a></h3>
+          <p>Coceira, vermelhidão e problemas digestivos? Entenda os sinais e como tratar pela alimentação.</p>
+          <a href="blog/alergia-alimentar-em-caes-sintomas-causas.html" class="post__link">Ler mais →</a>
         </div>
       </article>
       <article class="post">
-        <a href="#" class="post__media"><img src="assets/img/blog-3.jpg" alt="Pet recebendo alimentação saudável" width="580" height="316"></a>
+        <a href="blog/dermatite-em-caes-alimentacao-saude-da-pele.html" class="post__media"><img src="assets/img/blog-3.jpg" alt="Pet recebendo alimentação saudável" width="650" height="365" loading="lazy"></a>
         <div class="post__body">
-          <h3>O que é uma alimentação verdadeiramente saudável para cães?</h3>
-          <p>Entenda como escolher uma dieta que promove bem-estar de dentro pra fora.</p>
-          <a href="#" class="post__link">Ler mais →</a>
+          <h3><a href="blog/dermatite-em-caes-alimentacao-saude-da-pele.html">Dermatite em cães: como a alimentação influencia a saúde da pele</a></h3>
+          <p>A pele é um espelho da saúde interna. Veja como a dieta apoia a recuperação.</p>
+          <a href="blog/dermatite-em-caes-alimentacao-saude-da-pele.html" class="post__link">Ler mais →</a>
         </div>
       </article>
+    </div>
+    <div style="text-align:center;margin-top:38px">
+      <a href="blog/index.html" class="btn btn--lg btn--whats" style="--bg:var(--green)">Ver todos os artigos →</a>
     </div>
   </div>
 </section>
@@ -383,5 +386,53 @@
 </a>
 
 <script src="assets/js/script.js" defer></script>
+
+<!-- ===== Dados estruturados (SEO) ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://petdermafood.com.br/#organization",
+      "name": "Petderma Food",
+      "url": "https://petdermafood.com.br/",
+      "logo": "https://petdermafood.com.br/assets/img/logo.png",
+      "description": "Linha de alimentação natural e hipoalergênica para cães e gatos, desenvolvida por especialistas em dermatologia veterinária.",
+      "sameAs": ["https://www.instagram.com/petderma/", "https://www.youtube.com/channel/UCTgaF30wuaPQPPr2kEYxoRw"],
+      "address": {"@type": "PostalAddress", "streetAddress": "R. República do Iraque, 1497 - Campo Belo", "addressLocality": "São Paulo", "addressRegion": "SP", "postalCode": "04611-003", "addressCountry": "BR"},
+      "contactPoint": {"@type": "ContactPoint", "telephone": "+55-11-98981-2898", "contactType": "customer service", "areaServed": "BR", "availableLanguage": "Portuguese"}
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://petdermafood.com.br/#website",
+      "url": "https://petdermafood.com.br/",
+      "name": "Petderma Food",
+      "publisher": {"@id": "https://petdermafood.com.br/#organization"},
+      "inLanguage": "pt-BR"
+    },
+    {
+      "@type": "Product",
+      "name": "Petderma Food — Comida Natural Hipoalergênica",
+      "image": "https://petdermafood.com.br/assets/img/kit-box.png",
+      "description": "Comida natural e hipoalergênica para cães e gatos, com 50% de proteína de lombo suíno, sem grãos, corantes ou conservantes. Desenvolvida por dermatologistas veterinários.",
+      "brand": {"@id": "https://petdermafood.com.br/#organization"},
+      "category": "Alimentação natural para pets",
+      "audience": {"@type": "PeopleAudience", "suggestedMinAge": 0},
+      "offers": {"@type": "AggregateOffer", "priceCurrency": "BRL", "availability": "https://schema.org/InStock", "url": "https://petdermastore.com.br/"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Quais ingredientes vocês usam nas receitas?", "acceptedAnswer": {"@type": "Answer", "text": "Usamos apenas ingredientes 100% naturais como abóbora, mandioquinha, chuchu, ervilha, proteína de lombo suíno e banha suína. Sem grãos, corantes ou conservantes."}},
+        {"@type": "Question", "name": "É necessário manter refrigerado ou congelado?", "acceptedAnswer": {"@type": "Answer", "text": "Sim! Por ser um alimento fresco e embalado a vácuo, o ideal é manter congelado. Após aberto, deve ser consumido em até 48h."}},
+        {"@type": "Question", "name": "Serve para cães com alergias ou problemas de pele?", "acceptedAnswer": {"@type": "Answer", "text": "Sim! Nossas fórmulas foram desenvolvidas por especialistas em dermatologia veterinária com foco em pets com sensibilidades alimentares e dermatites."}},
+        {"@type": "Question", "name": "Vocês entregam em todo o Brasil?", "acceptedAnswer": {"@type": "Answer", "text": "Atualmente realizamos entregas em regiões específicas. Fale com nosso time no WhatsApp para verificar a disponibilidade na sua área."}},
+        {"@type": "Question", "name": "Como sei qual porção é ideal pro meu pet?", "acceptedAnswer": {"@type": "Answer", "text": "A quantidade diária varia conforme o peso: até 4kg 200g, 4-7kg 300g, 7-9kg 350g, 9-13kg 400g, 13-16kg 500g, 16-20kg 600g. Acima de 20kg, fale com nosso time para recomendação personalizada."}}
+      ]
+    }
+  ]
+}
+</script>
 </body>
 </html>
