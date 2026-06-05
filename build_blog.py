@@ -17,7 +17,7 @@ def header(prefix):
       <img src="{prefix}assets/img/logo.png" alt="Petderma Food" width="200" height="31">
     </a>
     <nav class="nav">
-      <a href="{prefix}blog/index.html">Blog</a>
+      <a href="{prefix}blog/">Blog</a>
       <a href="{prefix}index.html#beneficios">Quem Somos</a>
       <a href="{prefix}index.html#contato">Contato</a>
     </nav>
@@ -38,7 +38,7 @@ def footer(prefix):
     </div>
     <div class="footer__col"><h3>Links rápidos</h3><ul>
       <li><a href="{prefix}index.html#beneficios">Quem Somos</a></li>
-      <li><a href="{prefix}blog/index.html">Blog</a></li>
+      <li><a href="{prefix}blog/">Blog</a></li>
       <li><a href="{prefix}index.html#faq">Dúvidas</a></li>
       <li><a href="{STORE}" target="_blank" rel="noopener">Loja oficial</a></li>
     </ul></div>
@@ -264,7 +264,7 @@ POSTS = [
 ]
 
 def render_post(p, idx):
-    canonical = f"{BASE}/blog/{p['slug']}.html"
+    canonical = f"{BASE}/blog/{p['slug']}"
     date_br = "{}/{}/{}".format(*reversed(p['date'].split('-')))
     ld = {
       "@context":"https://schema.org","@type":"BlogPosting",
@@ -290,7 +290,7 @@ def render_post(p, idx):
     out += f'''
 <article class="article">
   <div class="container">
-    <nav class="breadcrumb" aria-label="Trilha"><a href="../index.html">Início</a><span>›</span><a href="index.html">Blog</a><span>›</span>{html.escape(p['title'])}</nav>
+    <nav class="breadcrumb" aria-label="Trilha"><a href="../index.html">Início</a><span>›</span><a href="./">Blog</a><span>›</span>{html.escape(p['title'])}</nav>
     <div class="article__wrap">
       <div class="article__meta"><span class="article__tag">{p['cat']}</span><time datetime="{p['date']}">{date_br}</time><span>·</span><span>Petderma Food</span></div>
       <h1 class="article__title">{html.escape(p['title'])}</h1>
@@ -313,7 +313,7 @@ def render_post(p, idx):
     return out
 
 def card(p, prefix_blog):
-    href = f"{prefix_blog}{p['slug']}.html"
+    href = f"{prefix_blog}{p['slug']}"
     return f'''<article class="post">
   <a href="{href}" class="post__media"><img src="../assets/img/{p['img']}" alt="{html.escape(p['title'])}" width="650" height="365" loading="lazy"></a>
   <div class="post__body">
@@ -328,7 +328,7 @@ def render_index():
     ld = {"@context":"https://schema.org","@type":"Blog","name":"Blog Petderma Food",
       "description":"Conteúdos sobre alimentação natural, saúde, pele e bem-estar de cães e gatos.",
       "url":canonical,"publisher":{"@type":"Organization","name":"Petderma Food"},
-      "blogPost":[{"@type":"BlogPosting","headline":p['title'],"url":f"{BASE}/blog/{p['slug']}.html","datePublished":p['date']} for p in POSTS]}
+      "blogPost":[{"@type":"BlogPosting","headline":p['title'],"url":f"{BASE}/blog/{p['slug']}","datePublished":p['date']} for p in POSTS]}
     extra = '<script type="application/ld+json">'+json.dumps(ld,ensure_ascii=False)+'</script>'
     out = head("Blog Petderma Food — Alimentação natural, saúde e pele dos pets",
       "Dicas e guias sobre alimentação natural, alergias, dermatologia e bem-estar de cães e gatos, por especialistas da Petderma Food.",
@@ -363,7 +363,7 @@ with open(os.path.join(ROOT,"blog","index.html"),"w",encoding="utf-8") as f:
 
 # sitemap
 urls = [(f"{BASE}/","1.0","weekly"),(f"{BASE}/blog/","0.9","weekly")]
-urls += [(f"{BASE}/blog/{p['slug']}.html","0.7","monthly") for p in POSTS]
+urls += [(f"{BASE}/blog/{p['slug']}","0.7","monthly") for p in POSTS]
 sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 for u,pr,fr in urls:
     sm += f'  <url><loc>{u}</loc><changefreq>{fr}</changefreq><priority>{pr}</priority></url>\n'
