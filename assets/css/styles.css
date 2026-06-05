@@ -71,10 +71,10 @@ p{margin:0}
   gap:18px;padding:10px 14px 10px 22px;transition:box-shadow .3s ease}
 .header.is-scrolled .header__pill{box-shadow:0 8px 30px rgba(17,92,141,.16)}
 .header__logo img{height:32px;width:auto}
-.nav{display:flex;gap:24px;margin-left:18px;font-family:var(--display);font-weight:600;font-size:15px}
+.nav{display:flex;gap:28px;flex:1;justify-content:center;font-family:var(--display);font-weight:600;font-size:15px}
 .nav a{color:var(--ink);position:relative;padding:4px 0}
 .nav a:hover{color:var(--green-deep)}
-.header__actions{margin-left:auto;display:flex;gap:10px;align-items:center}
+.header__actions{display:flex;gap:10px;align-items:center}
 .btn--ghost{font-size:14px}
 .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;
   cursor:pointer;padding:8px;margin-left:auto}
