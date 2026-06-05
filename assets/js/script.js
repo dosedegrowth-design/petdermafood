@@ -1,5 +1,13 @@
 // Petderma Food — interações leves
 (function () {
+  // Blindagem: garante que o conteúdo com animação de entrada apareça
+  // mesmo que a animação CSS não rode (aba em 2º plano, etc.)
+  document.documentElement.classList.add('js');
+  function markLoaded() { document.body.classList.add('is-loaded'); }
+  if (document.readyState !== 'loading') markLoaded();
+  else window.addEventListener('DOMContentLoaded', markLoaded);
+  setTimeout(markLoaded, 2000);
+
   // Menu mobile
   const header = document.querySelector('.header');
   const toggle = document.getElementById('navToggle');

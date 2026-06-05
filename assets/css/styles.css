@@ -93,8 +93,8 @@ p{margin:0}
 .hero__cta{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
 .hero__media{position:relative}
 .hero__media img{border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
-  background:rgba(255,255,255,.12);animation:heroFloat 6s ease-in-out infinite}
-@keyframes heroFloat{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(-1deg) translateY(-14px)}}
+  background:rgba(255,255,255,.12);animation:heroFloat 5s ease-in-out infinite}
+@keyframes heroFloat{0%{transform:rotate(-1.5deg) translateY(0)}50%{transform:rotate(1deg) translateY(-22px)}100%{transform:rotate(-1.5deg) translateY(0)}}
 /* blobs decorativos no fundo */
 .hero__blob{position:absolute;border-radius:50%;filter:blur(6px);z-index:0;pointer-events:none;
   background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.28),transparent 70%)}
@@ -114,9 +114,35 @@ p{margin:0}
 /* ---------- Entrada / reveal genérico ---------- */
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 .anim{opacity:0;animation:fadeUp .7s cubic-bezier(.22,1,.36,1) var(--d,0s) forwards}
+/* segurança: se a animação não rodar, o conteúdo aparece mesmo assim */
+.is-loaded .anim{opacity:1}
+
+/* indicador de rolagem (bouncing) */
+.hero__scroll{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:4;
+  width:30px;height:50px;border:2.5px solid rgba(255,255,255,.7);border-radius:16px;display:grid;justify-items:center}
+.hero__scroll::before{content:"";width:5px;height:9px;border-radius:3px;background:#fff;margin-top:8px;
+  animation:scrollDot 1.6s ease-in-out infinite}
+@keyframes scrollDot{0%{opacity:0;transform:translateY(-4px)}40%{opacity:1}80%{opacity:0;transform:translateY(14px)}}
+
+/* partículas flutuantes no hero */
+.hero__spark{position:absolute;z-index:1;border-radius:50%;background:rgba(255,255,255,.55);
+  pointer-events:none;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(20px) scale(.6);opacity:0}
+  15%{opacity:.8}85%{opacity:.8}100%{transform:translateY(-220px) scale(1);opacity:0}}
+
+/* brilho deslizante nos botões */
+.btn--whats,.btn--hero-solid,.btn--hero-outline{position:relative;overflow:hidden}
+.btn--whats::after,.btn--hero-solid::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-120%}100%{left:160%}}
+
+/* respeita usuários com "reduzir movimento": desliga só os loops, mantém entradas e hovers */
 @media(prefers-reduced-motion:reduce){
   .anim{opacity:1;animation:none}
-  .hero,.hero__media img,.hero__blob,.hero__doodle,.fab-whats::before{animation:none!important}
+  .hero,.hero__media img,.hero__blob,.hero__doodle,.hero__spark,.hero__scroll::before,
+  .btn--whats::after,.btn--hero-solid::after,.fab-whats::before{animation:none!important}
+  .hero__spark,.hero__scroll{display:none}
 }
 
 /* ---------- Highlights ---------- */
