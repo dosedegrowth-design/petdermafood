@@ -2,5 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/blog", "destination": "https://blog.petdermafood.com.br/", "permanent": true },
+    { "source": "/blog/:path*", "destination": "https://blog.petdermafood.com.br/:path*", "permanent": true }
+  ]
 }
